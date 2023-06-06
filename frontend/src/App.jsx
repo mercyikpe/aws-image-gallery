@@ -8,7 +8,7 @@ import Gallery from "./Gallery";
 
 function App() {
   const [images, setImages] = useState([]);
-
+ 
   useEffect(() => {
     fetchImages()
       .then((fetchedImages) => {
