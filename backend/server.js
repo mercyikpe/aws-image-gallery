@@ -2,10 +2,15 @@ const express = require("express");
 const aws = require("aws-sdk");
 const multer = require("multer");
 const cors = require("cors");
+require("dotenv").config();
+
+const app = express();
+
+app.use(cors());
 
 aws.config.update({
-  accessKeyId: "AKIA53YFFCSNDWYV2MUB",
-  secretAccessKey: "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",
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: "us-east-1",
 });
 
@@ -14,10 +19,6 @@ const s3 = new aws.S3();
 const upload = multer({
   storage: multer.memoryStorage(),
 });
-
-const app = express();
-
-app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({ message: "Api is running!" });
